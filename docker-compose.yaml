@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  python:
+    build: .
+    depends_on:
+      - db   
+
+  db:
+    container_name: db
+    image: postgresql:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data/pgdata
+
